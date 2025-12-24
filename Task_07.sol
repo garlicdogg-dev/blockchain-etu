@@ -1,19 +1,24 @@
-contract Task_03 {
-   struct Person {
-       string name;
-       uint8 age;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+
+contract Task_07 {
+   // Владелец контракта — адрес, который развернул контракт
+   address public owner;
+
+
+   constructor() {
+       owner = msg.sender;
    }
 
 
-   Person[] public people; // Массив структур
-
-
-   function addPerson(string memory _name, uint8 _age) external {
-       people.push(Person(_name, _age)); // Добавление новой структуры в массив
+   // Пример: Преобразование числа в массив байтов
+   // abi.encodePacked упаковывает данные в компактный байтовый массив
+   function getBytes(uint256 _value) public pure returns (bytes memory) {
+       return abi.encodePacked(_value);
    }
-   
-   function getUser(uint index) public view returns (string memory, uint8) {
-        Person memory person = people[index];
-        return (person.name, person.age);
-    }
+   function getBytesFromString(string memory _text) public pure returns (bytes memory) {
+    return bytes(_text);
+}
+
 }

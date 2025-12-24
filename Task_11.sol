@@ -1,19 +1,25 @@
-contract Task_03 {
-   struct Person {
-       string name;
-       uint8 age;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+
+contract Task_11 {
+   address public owner;
+
+
+   constructor() {
+       owner = msg.sender;
    }
 
 
-   Person[] public people; // Массив структур
-
-
-   function addPerson(string memory _name, uint8 _age) external {
-       people.push(Person(_name, _age)); // Добавление новой структуры в массив
+   // Пример 5: Модификатор доступа и управление владельцем
+   // onlyOwner — ограничивает вызов функции только владельцем
+   modifier onlyOwner() {
+       require(msg.sender == owner, "Not the contract owner");
+       _;
    }
-   
-   function getUser(uint index) public view returns (string memory, uint8) {
-        Person memory person = people[index];
-        return (person.name, person.age);
+   function transferOwnership(address newOwner) public onlyOwner {
+        require(newOwner != address(0), "New owner cannot be zero address");
+        owner = newOwner;
     }
+
 }

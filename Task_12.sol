@@ -1,19 +1,25 @@
-contract Task_03 {
-   struct Person {
-       string name;
-       uint8 age;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+
+contract Task_12 {
+   address public owner;
+
+
+   constructor() {
+       owner = msg.sender;
    }
 
 
-   Person[] public people; // Массив структур
-
-
-   function addPerson(string memory _name, uint8 _age) external {
-       people.push(Person(_name, _age)); // Добавление новой структуры в массив
+   // Пример 6: Функции с модификаторами view и pure
+   // pure — функция не читает и не изменяет состояние
+   // view — функция читает, но не изменяет состояние
+   // payable — функция может принимать эфир (здесь не используется)
+   // Функция умножает число на 2
+   function multiply(uint256 _value) public pure returns (uint256) {
+       return _value * 2;
    }
-   
-   function getUser(uint index) public view returns (string memory, uint8) {
-        Person memory person = people[index];
-        return (person.name, person.age);
+   function multiplyByThree(uint256 _value) public pure returns (uint256) {
+        return _value * 3;
     }
 }

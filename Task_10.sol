@@ -1,19 +1,23 @@
-contract Task_03 {
-   struct Person {
-       string name;
-       uint8 age;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+
+contract Task_10 {
+   address public owner;
+
+
+   constructor() {
+       owner = msg.sender;
    }
 
 
-   Person[] public people; // Массив структур
-
-
-   function addPerson(string memory _name, uint8 _age) external {
-       people.push(Person(_name, _age)); // Добавление новой структуры в массив
+   // Пример 4: Работа с временными метками (timestamps)
+   // block.timestamp — текущая временная метка блока (секунды с 1970 года)
+   // Функция проверяет, является ли переданная метка будущей
+   function isFutureTimestamp(uint256 _timestamp) public view returns (bool) {
+       return _timestamp > block.timestamp;
    }
-   
-   function getUser(uint index) public view returns (string memory, uint8) {
-        Person memory person = people[index];
-        return (person.name, person.age);
+   function isPastTimestamp(uint256 _timestamp) public view returns (bool) {
+        return _timestamp < block.timestamp;
     }
 }

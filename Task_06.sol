@@ -1,19 +1,15 @@
-contract Task_03 {
-   struct Person {
-       string name;
-       uint8 age;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+
+contract Task_06 {
+   uint256 public constant MAX_UINT = type(uint256).max; // Максимальное значение uint256
+
+
+   function getMaxUint256() external pure returns (uint256) {
+       return MAX_UINT; // Возвращает максимальное значение
    }
-
-
-   Person[] public people; // Массив структур
-
-
-   function addPerson(string memory _name, uint8 _age) external {
-       people.push(Person(_name, _age)); // Добавление новой структуры в массив
+   function getMaxUint8() external pure returns (uint8) {
+        return type(uint8).max;
    }
-   
-   function getUser(uint index) public view returns (string memory, uint8) {
-        Person memory person = people[index];
-        return (person.name, person.age);
-    }
 }
