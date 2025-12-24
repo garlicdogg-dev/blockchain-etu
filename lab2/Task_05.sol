@@ -1,32 +1,41 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract Task_02 {
-    uint[] public dynamicArray; // Динамический массив
-    uint[5] public fixedArray;  // Фиксированный массив из 5 элементов
-
-    function addToDynamicArray(uint _value) external {
-        dynamicArray.push(_value); // Добавление элемента в динамический массив
+contract Task_05 {
+    enum Status {
+        Pending,
+        Active,
+        Inactive
     }
 
-    function sumArray() public view returns (uint) {
-        uint sum = 0;
+    Status public currentStatus; // Переменная типа Status
 
-        for (uint i = 0; i < dynamicArray.length; i++) {
-            sum += dynamicArray[i];
-        }
+    uint[] public temperaturesC; // Массив температур в градусах Цельсия
 
-        return sum;
+    function setStatus(Status _status) external {
+        currentStatus = _status; // Установка текущего статуса
     }
 
-    // Новая функция: генерация массива квадратов чисел от 1 до n
-    function generateSquares(uint n) public pure returns (uint[] memory) {
-        uint[] memory squares = new uint[](n);
+    function getBalance() public view returns (uint) {
+        return uint(currentStatus);
+    }
 
-        for (uint i = 0; i < n; i++) {
-            squares[i] = (i + 1) * (i + 1);
+    // Функция для добавления температуры в массив
+    function addTemperature(uint _tempC) external {
+        temperaturesC.push(_tempC);
+    }
+
+    // Функция для конвертации массива температур в Фаренгейты
+    function convertToFahrenheit(uint[] memory tempsC) public pure returns (uint[] memory) {
+        uint[] memory tempsF = new uint[](tempsC.length);
+        for (uint i = 0; i < tempsC.length; i++) {
+            tempsF[i] = (tempsC[i] * 9) / 5 + 32; // Формула перевода °C → °F
         }
+        return tempsF;
+    }
 
-        return squares;
+    // Функция для конвертации всех температур, хранящихся в storage
+    function convertStoredTemperatures() public view returns (uint[] memory) {
+        return convertToFahrenheit(temperaturesC);
     }
 }

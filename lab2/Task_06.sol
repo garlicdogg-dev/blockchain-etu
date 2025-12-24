@@ -1,32 +1,30 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract Task_02 {
-    uint[] public dynamicArray; // Динамический массив
-    uint[5] public fixedArray;  // Фиксированный массив из 5 элементов
-
-    function addToDynamicArray(uint _value) external {
-        dynamicArray.push(_value); // Добавление элемента в динамический массив
+contract Task_06 {
+    uint256 public constant MAX_UINT = type(uint256).max;
+    
+    function getMaxUint256() external pure returns (uint256) {
+        return MAX_UINT;
     }
 
-    function sumArray() public view returns (uint) {
-        uint sum = 0;
-
-        for (uint i = 0; i < dynamicArray.length; i++) {
-            sum += dynamicArray[i];
-        }
-
-        return sum;
+    function getMaxUint8() external pure returns (uint8) {
+        return type(uint8).max;
     }
 
-    // Новая функция: генерация массива квадратов чисел от 1 до n
-    function generateSquares(uint n) public pure returns (uint[] memory) {
-        uint[] memory squares = new uint[](n);
+    // Массив 7 цветов радуги
+    string[7] private rainbowColors = [
+        "Red",
+        "Orange",
+        "Yellow",
+        "Green",
+        "Blue",
+        "Indigo",
+        "Violet"
+    ];
 
-        for (uint i = 0; i < n; i++) {
-            squares[i] = (i + 1) * (i + 1);
-        }
-
-        return squares;
+    // Функция возвращает все цвета радуги
+    function getRainbowColors() external view returns (string[7] memory) {
+        return rainbowColors;
     }
 }
