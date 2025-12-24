@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract Task_02 {
+contract Task_09 {
     uint[] public dynamicArray; // Динамический массив
     uint[5] public fixedArray;  // Фиксированный массив из 5 элементов
 
