@@ -1,19 +1,22 @@
-contract Task_03 {
-   struct Person {
-       string name;
-       uint8 age;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+
+contract Task_05 {
+   enum Status {
+       Pending,
+       Active,
+       Inactive
    }
 
 
-   Person[] public people; // Массив структур
+   Status public currentStatus; // Переменная типа Status
 
 
-   function addPerson(string memory _name, uint8 _age) external {
-       people.push(Person(_name, _age)); // Добавление новой структуры в массив
+   function setStatus(Status _status) external {
+       currentStatus = _status; // Установка текущего статуса
    }
-   
-   function getUser(uint index) public view returns (string memory, uint8) {
-        Person memory person = people[index];
-        return (person.name, person.age);
-    }
+   function getBalance() public view returns (uint) {
+        return uint(currentStatus);
+   }
 }
