@@ -1,32 +1,35 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract Task_02 {
-    uint[] public dynamicArray; // Динамический массив
-    uint[5] public fixedArray;  // Фиксированный массив из 5 элементов
-
-    function addToDynamicArray(uint _value) external {
-        dynamicArray.push(_value); // Добавление элемента в динамический массив
+contract Task_03 {
+    struct Person {
+        string name;
+        uint8 age;
     }
 
-    function sumArray() public view returns (uint) {
-        uint sum = 0;
+    Person[] public people; // Массив структур
 
-        for (uint i = 0; i < dynamicArray.length; i++) {
-            sum += dynamicArray[i];
-        }
-
-        return sum;
+    function addPerson(string memory _name, uint8 _age) external {
+        people.push(Person(_name, _age)); // Добавление новой структуры в массив
+    }
+   
+    function getUser(uint index) public view returns (string memory, uint8) {
+        Person memory person = people[index];
+        return (person.name, person.age);
     }
 
-    // Новая функция: генерация массива квадратов чисел от 1 до n
-    function generateSquares(uint n) public pure returns (uint[] memory) {
-        uint[] memory squares = new uint[](n);
+    // Новая функция: вычисление факториала числа n с помощью цикла while
+    function generateFactorial(uint n) public pure returns (uint256) {
+        require(n >= 0, "n must be non-negative");
 
-        for (uint i = 0; i < n; i++) {
-            squares[i] = (i + 1) * (i + 1);
+        uint256 result = 1;
+        uint256 i = 1;
+
+        while (i <= n) {
+            result *= i;
+            i++;
         }
 
-        return squares;
+        return result;
     }
 }
